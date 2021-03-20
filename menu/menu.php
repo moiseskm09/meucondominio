@@ -1,0 +1,42 @@
+<div id="layoutSidenav_nav">
+    <nav class="sb-sidenav accordion fundo-menu" id="sidenavAccordion">
+        <div class="sb-sidenav-menu">
+            <div class="nav">
+                <?php
+                $seleciona_menu = mysqli_query($conexao, "SELECT * from menu GROUP BY menu");
+                while ($resultado = mysqli_fetch_assoc($seleciona_menu)) {
+                    $idMenu = $resultado["id"];
+                    ?>  
+                    <a class="nav-link link-menu collapsed" href="#<?php echo $resultado['caminho_drop']; ?>" data-toggle="collapse" data-target="#<?php echo $resultado['caminho_drop']; ?>" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="<?php echo $resultado['icone']; ?> tamanho-icone"></i></div>
+                        <?php echo $resultado['menu']; ?>
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>       
+                    <?php
+                    $seleciona_submenu = mysqli_query($conexao, "SELECT * FROM submenu WHERE cod_menu = '$idMenu' order by submenu");
+                    if (mysqli_num_rows($seleciona_submenu) == 0) {
+                        
+                    } else {
+                        ?>
+                        <div class="collapse" id="<?php echo $resultado['caminho_drop']; ?>" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="fundo-submenu">
+                                <?php
+                                while ($resultado_submenu = mysqli_fetch_assoc($seleciona_submenu)) {
+                                    ?>
+                                    <a class="nav-link link-submenu" href="<?php echo $resultado_submenu['caminho']; ?>">
+                                        <div class="sb-nav-link-icon"><i class="<?php echo $resultado['icone']; ?> tamanho-icone"></i></div>
+                                    <?php echo $resultado_submenu['submenu']; ?></a>
+        <?php } ?> 
+                            </nav>
+                        </div>
+
+    <?php }
+} ?>           
+            </div>
+        </div>
+        <div class="sb-sidenav-footer rodape-menu">
+            <div class="small">Usuário logado:</div>
+            <span class="usuario"><?php echo "Moises"; ?> </span> <span class="text-white" style="font-size:15px"><?php echo "Pequeno"; ?></span>
+                    </div>
+                    </nav>
+                    </div>
