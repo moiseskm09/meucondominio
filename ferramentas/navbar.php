@@ -1,5 +1,5 @@
 <nav class="sb-topnav navbar navbar-expand fundo-navbar">
-    <a class="navbar-brand" href="home" style="color: #FFD70F;">Quallyplan</a>
+    <a class="navbar-brand" href="home.php" style="color: #FFD70F;">Quallyplan</a>
     <button class="btn btn-warning btn-sm order-1 order-lg-0 menu-mobile" id="sidebarToggle" href="#"><i class="fas fa-bars text-white"></i></button>
     <!-- Navbar Search-->
 

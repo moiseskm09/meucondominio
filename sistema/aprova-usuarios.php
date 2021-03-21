@@ -9,10 +9,9 @@ require_once '../ferramentas/conexao.php';
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="stylesheet" href="../css/bootstrap.css">
         <link href="../css/menu.css" rel="stylesheet" />
-        <link href="../css/servicos.css" rel="stylesheet" />
         <link href="../css/geral.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../css/bootstrap.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="../js/jquery-3.1.1.js"></script>
         <script src="../js/mask.js"></script>
@@ -40,7 +39,7 @@ require_once '../ferramentas/conexao.php';
 
                         <div class="table-responsive">
                             <table class="table table-borderless table-sm">
-                                <thead class="border thead-tabela">
+                                <thead class="border bg-info text-white">
                                     <tr>
                                         <th>Código</th>
                                         <th>Nome</th>
@@ -65,7 +64,7 @@ require_once '../ferramentas/conexao.php';
                                                 <td><?php echo $resultado_buscaMoradorAprovacao['m_telefone'];?></td>
                                                 <td><?php echo $resultado_buscaMoradorAprovacao['m_datacadastro'];?></td>
                                                 <td>
-                                                    <a href="" data-toggle="modal" data-target="" class="mr-3"><i class="fas fa-eye icone-editar"></i></a>
+                                                    <a href="" data-toggle="modal" data-target="" class="mr-3"><i class="fas fa-eye text-primary"></i></a>
                                                     <a href="" data-toggle="modal" data-target="" class="mr-3"><i class="fas fa-pencil-alt icone-editar"></i></a>
                                                  
                                                     <a href="" data-toggle="modal" data-target=""><i class="fas fa-times icone-desativar"></i></a>
