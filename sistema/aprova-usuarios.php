@@ -29,9 +29,9 @@ require_once '../ferramentas/conexao.php';
                             <h2 class="titulo">Usuários aguardando aprovação</h2>
                             <div class="btn-toolbar mb-2 mb-md-0">
                                 <div class="mr-2">
-                                    <button class="botoes" href="#adicionar" data-toggle="modal" data-target="#adicionar">Adicionar</button>
-                                    <button class="botoes">Filtrar</button>
-                                    <button class="botoes">Exportar</button>
+                                    <button class="btn btn-sm btn-success" href="#adicionar" data-toggle="modal" data-target="#adicionar">Adicionar</button>
+                                    <button class="btn btn-sm btn-primary">Filtrar</button>
+                                    <button class="btn btn-sm btn-dark">Exportar</button>
 
                                 </div>
                             </div>
@@ -58,17 +58,56 @@ require_once '../ferramentas/conexao.php';
                                             ?>
                                             <tr class="linha-hover">
                                                 <td><?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?></td>
-                                                <td><?php echo $resultado_buscaMoradorAprovacao['m_nome']; ?></td>
+                                                <td><?php echo ucfirst(strtolower($resultado_buscaMoradorAprovacao['m_nome']));?></td>
                                                 <td><?php echo $resultado_buscaMoradorAprovacao['m_cpf'];?></td>
                                                 <td><?php echo $resultado_buscaMoradorAprovacao['m_email'];?></td>
                                                 <td><?php echo $resultado_buscaMoradorAprovacao['m_telefone'];?></td>
-                                                <td><?php echo $resultado_buscaMoradorAprovacao['m_datacadastro'];?></td>
-                                                <td>
-                                                    <a href="" data-toggle="modal" data-target="" class="mr-3"><i class="fas fa-eye text-primary"></i></a>
-                                                    <a href="" data-toggle="modal" data-target="" class="mr-3"><i class="fas fa-pencil-alt icone-editar"></i></a>
-                                                 
-                                                    <a href="" data-toggle="modal" data-target=""><i class="fas fa-times icone-desativar"></i></a>
-
+                                                <td><?php echo date("d/m/Y", strtotime($resultado_buscaMoradorAprovacao['m_datacadastro']));?></td>
+                                                <td class="text-center">
+                                                    <a href="#user_aprovacao<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" data-toggle="modal" data-target="#user_aprovacao<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" class="mr-3"><i class="fas fa-eye text-primary"></i></a>
+                                                    <!-- Modal visualizar-->
+                        <div class="modal text-left" id="user_aprovacao<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content bg-light">
+                                    <div class="modal-header border-0 bg-info">
+                                        <h5 class="text-white">Visualização Completa</h5>
+                                        <a href="" data-dismiss="modal" aria-label="Fechar"><i class="fas fa-times icone-desativar"></i></a>
+                                        </button>
+                                    </div>
+                                    <form action="" method="POST">
+                                        <div class="modal-body">
+                                            <input type="hidden" name="cod_UserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>">
+                                            <label for="nomeUserAprovacao">Nome Completo</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" id="servico" name="nomeUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo ucfirst(strtolower($resultado_buscaMoradorAprovacao['m_nome']))." ".ucfirst(strtolower($resultado_buscaMoradorAprovacao['m_sobrenome']));?>" required readonly>
+                                            </div>
+                                            <label for="cpfUserAprovacao">CPF</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" id="servico" name="cpfUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_cpf'];?>" required readonly>
+                                            </div>
+                                            <label for="emailUserAprovacao">E-mail</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" id="servico" name="emailUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_email'];?>" required readonly>
+                                            </div>
+                                            <label for="telefoneUserAprovacao">Telefone</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" id="servico" name="telefoneUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_telefone'];?>" required readonly>
+                                            </div>
+                                            <label for="nomeImovelUserAprovacao">Nome Imóvel</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" id="servico" name="nomeImovelUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_nomeimovel'];?>" required readonly>
+                                            </div>
+                                             
+                                        </div>
+                                        <div class="modal-footer border-0">
+                                            <button type="submit" class="btn btn-sm btn-success">Aprovar cadastro</button>
+                                            <button type="submit" class="btn btn-sm btn-danger">Reprovar cadastro</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal visualizar fim -->
                                                 </td> 
                                             </tr>
                                             <?php
@@ -84,33 +123,7 @@ require_once '../ferramentas/conexao.php';
                                 </tbody>
                             </table>
                         </div>
-                        <!-- Modal adicionar-->
-                        <div class="modal" id="adicionar" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content bg-light">
-                                    <div class="modal-header border-0 header-modal">
-                                        <h5 class="modal-title">Adicionar serviço</h5>
-                                        <a href="" data-dismiss="modal" aria-label="Fechar"><i class="fas fa-times icone-desativar"></i></a>
-                                        </button>
-                                    </div>
-                                    <form action="" method="POST">
-                                        <div class="modal-body">
-                                            <input type="hidden" name="cod_servico_editado" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resulta_buscaServico['cod_servico']; ?>">
-                                            <div class="input-group mb-3">
-                                                <input type="text" id="servico" name="servico" class="form-control tamanhoInput" aria-describedby="basic-addon1" placeholder="Nome do serviço" required>
-                                            </div>
-                                            <div class="input-group mb-3">
-                                                <input type="text" id="valorHora" name="valorHora" class="form-control tamanhoInput money2" aria-describedby="basic-addon1" placeholder="Valor por hora" required>
-                                            </div>  
-                                        </div>
-                                        <div class="modal-footer border-0">
-                                            <button type="submit" class="botoes">Adicionar</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal adicionar fim -->
+                   
                         <!--fim conteudo da tela aqui!-->
                 </main>
                 <?php include_once "../ferramentas/rodape.php"; ?>
