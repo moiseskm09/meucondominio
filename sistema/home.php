@@ -1,6 +1,6 @@
 <?php 
-require_once '../ferramentas/conexao.php';
-require_once '../ferramentas/sessao.php';
+require_once '../config/conexao.php';
+require_once '../config/sessao.php';
 ?>
 
 <!DOCTYPE html>

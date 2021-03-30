@@ -1,6 +1,6 @@
 <?php
 date_default_timezone_set('America/Sao_Paulo');
-require_once 'conexao.php';
+require_once '../config/conexao.php';
 
 if(isset($_POST['email'], $_POST['senha'])){
     $emailLogin = $_POST['email'];

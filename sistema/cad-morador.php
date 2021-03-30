@@ -27,29 +27,17 @@ require_once '../config/config_geral.php';
                     <div class="container-fluid">
                         <!--conteudo da tela aqui!-->
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="titulo">Moradores aguardando aprovação</h2>
+                            <h2 class="titulo">Moradores</h2>
                             <div class="btn-toolbar mb-2 mb-md-0">
                                 <div class="mr-2">
+                                    <button class="btn btn-sm btn-success">Adicionar</button>
                                     <button class="btn btn-sm btn-primary">Filtrar</button>
                                     <button class="btn btn-sm btn-dark">Exportar</button>
 
                                 </div>
                             </div>
                         </div>
-<?php 
-$aprovacao = (int) $_GET["aprovacao"];
-                    if ($aprovacao === 1) {
-                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                  <a href="#" class="close" data-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></a>
-                                  <p class="mb-0"><strong>Uhuuu!</strong> O Cadastro foi <strong>APROVADO</strong> com sucesso!</p>
-                                  </div>';
-                    }else if ($aprovacao === 2) {
-                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                  <a href="#" class="close" data-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></a>
-                                  <p class="mb-0"><strong>Uhuuu!</strong> O Cadastro foi <strong>REPROVADO</strong> com sucesso!</p>
-                                  </div>';
-                    }
-?>
+
                         <div class="table-responsive">
                             <table class="table table-borderless table-sm">
                                 <thead class="border bg-info text-white">
@@ -65,7 +53,7 @@ $aprovacao = (int) $_GET["aprovacao"];
                                 </thead>
                                 <tbody class="border">
                                     <?php
-                                    $sql_buscaMoradorAprovacao = mysqli_query($conexao, "SELECT * FROM morador WHERE m_status = '2'");
+                                    $sql_buscaMoradorAprovacao = mysqli_query($conexao, "SELECT * FROM morador WHERE m_status = '1'");
                                     if (mysqli_num_rows($sql_buscaMoradorAprovacao) > 0) {
                                         while ($resultado_buscaMoradorAprovacao = mysqli_fetch_assoc($sql_buscaMoradorAprovacao)) {
                                             ?>
@@ -113,8 +101,7 @@ $aprovacao = (int) $_GET["aprovacao"];
                                              
                                         </div>
                                         <div class="modal-footer border-0">
-                                            <a href="../ferramentas/aprovacao-usuario.php?aprovaUserCod=<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" name="aprovaUserCod" class="btn btn-sm btn-success" >Aprovar cadastro</a>
-                                            <a href="../ferramentas/reprovacao-usuario.php?reprovaUserCod=<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" name="reprovaUserCod" class="btn btn-sm btn-danger" >Reprovar cadastro</a>
+                                            <a href="" data-dismiss="modal" aria-label="Fechar" class="btn btn-sm btn-danger" >Fechar</a>
                                         </div>
                                     </form>
                                 </div>

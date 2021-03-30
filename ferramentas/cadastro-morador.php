@@ -1,7 +1,7 @@
 <?php
 
 date_default_timezone_set('America/Sao_Paulo');
-include_once 'conexao.php';
+include_once '../config/conexao.php';
 
 $nome = $_POST['nome'];
 $sobrenome = $_POST['sobrenome'];
