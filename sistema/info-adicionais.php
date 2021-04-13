@@ -41,6 +41,7 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
 
             }
         </style>
+        
     </head>
     <body style="background-color: #ffffff">
 <?php include_once "../ferramentas/navbar.php"; ?>
@@ -49,7 +50,7 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                 <h4 class="text-center">Olá <span class="destaque"><?php echo $resultadoBuscaInfo['m_nome']; ?></span>, precisamos que preencha as informações abaixo!</h4>  
                 <p class="text-right destaque"> Os campos com <span class="text-danger">*</span> são obrigatórios!</p>
             </div>
-            <form id="formulario">
+            <form id="formulario" method="POST" action="../ferramentas/adiciona-info-adicionais.php">
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="condominio">Nome do Condomínio <span class="text-danger">*</span></label>
@@ -71,9 +72,13 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                             <option value="Locatário">Locatário(a)</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="nome">Nome Completo<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control tamanhoInput" id="nome" name="nome" value="<?php echo $resultadoBuscaInfo['m_nome'] . " " . $resultadoBuscaInfo['m_sobrenome']; ?>" required>
+                    <div class="form-group col-md-6">
+                        <label for="nome">Nome<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control tamanhoInput" id="nome" name="nome" value="<?php echo $resultadoBuscaInfo['m_nome']; ?>" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="sobrenome">Sobrenome<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control tamanhoInput" id="sobrenome" name="sobrenome" value="<?php echo $resultadoBuscaInfo['m_sobrenome']; ?>" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="rg">RG <span class="text-danger">*</span></label>
@@ -202,23 +207,25 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                 <div class="form-row">
                     <div class="form-group col-md-5">
                         <label for="modeloVeiculo">Marca/Modelo</label>
-                        <input type="text" class="form-control tamanhoInput" id="modeloVeiculo" name="modeloVeiculo">
+                        <input type="text" class="form-control tamanhoInput" id="modeloVeiculo" name="modeloVeiculo[]">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="corVeiculo">Cor</label>
-                        <input type="text" class="form-control tamanhoInput" id="corVeiculo" name="corVeiculo">
+                        <input type="text" class="form-control tamanhoInput" id="corVeiculo" name="corVeiculo[]">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="placaVeiculo">Placa</label>
-                        <input type="text" class="form-control tamanhoInput" id="placaVeiculo" name="placaVeiculo">
+                        <input type="text" class="form-control tamanhoInput placa" id="placaVeiculo" name="placaVeiculo[]" maxlength="7">
                     </div>
                     <div class="form-group col-md-1 mt-2">
                         <br>
-                        <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-primary" id="btnveiculo"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>    
+                <div id="veiculos"></div>
+                
                 <div class="header mt-5 mb-1">
-                    <h4 class="text-center">Este é o último! Animais de estimação?</h4>   
+                    <h4 class="text-center">Este é o último, prometo! Animais de estimação?</h4>   
                 </div>
                 <p class="text-right destaque"> Caso não tenha, deixe os campos em branco!</p>
 
@@ -243,12 +250,11 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                     </div>
                     <div class="form-group col-md-1 mt-2">
                         <br>
-                        <button type="button" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-primary" id="btnanimal"><i class="fa fa-plus"></i></button>
                     </div>
-
-
                 </div>
 
+                <div id="animais"></div>
 
                 <div class="alert alert-info" style="font-size: 18px;">
                     As informações acima constituem a expressão da verdade pelos quais me comprometo, e eventuais
