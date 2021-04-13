@@ -10,7 +10,8 @@
         <script src="js/jquery3.2.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-
+        <link rel="shortcut icon" href="img/Logo_quallyplan.svg" type="image/x-icon">
+	<link rel="icon" href="img/Logo_quallyplan.svg" type="image/x-icon">
         <title>Meu Condomínio - Autenticação</title>
         <style>
             *{
@@ -22,7 +23,6 @@
             }
 
             body {
-               background-image: url("img/5026563.jpg");
                  display: -ms-flexbox;
                 display: flex;
                 -ms-flex-align: center;
@@ -105,7 +105,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div id="caixa-login" class="">
                         <div class="text-center logo mb-3">
-                            <img src="img/Logo_quallyplan.svg" height="100">
+                            <img src="img/Logo_quallyplan.svg" height="200">
                         </div>
 
                         <div class="apresentacao text-center text-dark">

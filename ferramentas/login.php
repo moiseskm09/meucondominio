@@ -15,16 +15,22 @@ if(isset($_POST['email'], $_POST['senha'])){
 	$_SESSION['nome']=$resultadoUsuario['nome'];
 	header("Location: ../sistema/home.php");
     }else if($num_linhas == 0){
-        $sqlMorador = mysqli_query($conexao, "SELECT m_email, m_senha, m_nome, m_sobrenome, m_status FROM morador WHERE m_email = '$emailLogin' and m_senha = '$senhaLogin'");
+        $sqlMorador = mysqli_query($conexao, "SELECT m_cod,m_email, m_senha, m_nome, m_sobrenome, m_status, info_preenchida FROM morador WHERE m_email = '$emailLogin' and m_senha = '$senhaLogin'");
     $num_linhasMorador = mysqli_num_rows($sqlMorador);
     $resultadoMorador = mysqli_fetch_assoc($sqlMorador);
     $m_status = $resultadoMorador['m_status'];
-    if($num_linhasMorador == 1 && $m_status == 1){
+    $m_infoPreenchida = $resultadoMorador['info_preenchida'];
+    if($num_linhasMorador == 1 && $m_status == 1 && $m_infoPreenchida == 1){
         session_start();
 	$_SESSION['email']=$resultadoMorador['m_email'];
 	$_SESSION['senha']=$resultadoMorador['m_senha'];
 	$_SESSION['nome']=$resultadoMorador['m_nome'];
 	header("Location: ../sistema/home.php");
+    }else if($num_linhasMorador == 1 && $m_status == 1 && $m_infoPreenchida == 0){
+        session_start();
+	$_SESSION['nome']=$resultadoMorador['m_nome'];
+        $_SESSION['cod']=$resultadoMorador['m_cod'];
+	header("Location: ../sistema/info-adicionais.php");
     }else if($num_linhasMorador == 1 && $m_status == 2){
         header("location: ../index.php?erro=4");
     }else if($num_linhasMorador == 0){

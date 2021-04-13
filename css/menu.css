@@ -8,10 +8,10 @@ and open the template in the editor.
     Author     : Moises
 */
 .fundo-navbar, .fundo-menu, .fundo-dropdown{
-    background-color: #17a2b8;
+    background-color: #023246;
 }
 .fundo-submenu {
-    background-color: #0f7180;
+    background-color: #023246;
 }
 .link-menu {
     color:#ffffff;
@@ -19,8 +19,7 @@ and open the template in the editor.
     font-weight: 500;
 }
 .link-menu:hover{
-    background-color: #0f7180;
-    color:#FFD70F;
+    color:#EB0FA5;
     font-weight: bold;
 }
 
@@ -30,20 +29,19 @@ and open the template in the editor.
     font-weight: 500;
 }
 .link-submenu:hover{
-    background-color: #0f7180;
-    color:#FFD70F;
+    color:#EB0FA5;
     font-weight: bold;
 }
 .rodape-menu{
     color:#ffffff;
-     box-shadow: 0px 0px 7px #FFD70F;
+     box-shadow: 0px 0px 7px #EB0FA5;
      
 }
 .tamanho-icone{
     font-size: 20px;
 }
 .usuario {
-    color:#FFD70F;
+    color:#EB0FA5;
     font-weight: 600;
 }
 
@@ -56,6 +54,12 @@ and open the template in the editor.
     border-radius: 10px;
     background: #FFD70F;
     -webkit-box-shadow: inset 0 0 6px #FFD70F; 
+}
+
+.menu-mobile{
+    background: #EB0FA5;
+    border-radius: 5px;
+    border: none;
 }
 :root {
   --blue: #007bff;

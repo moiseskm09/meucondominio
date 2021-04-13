@@ -40,7 +40,7 @@ require_once '../config/config_geral.php';
 
                         <div class="table-responsive">
                             <table class="table table-borderless table-sm">
-                                <thead class="border bg-info text-white">
+                                <thead class="border thead-tabela">
                                     <tr>
                                         <th>Código</th>
                                         <th>Nome</th>
@@ -70,7 +70,7 @@ require_once '../config/config_geral.php';
                         <div class="modal text-left" id="user_aprovacao<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content bg-light">
-                                    <div class="modal-header border-0 bg-info">
+                                    <div class="modal-header border-0 header-modal">
                                         <h5 class="text-white">Visualização Completa</h5>
                                         <a href="" data-dismiss="modal" aria-label="Fechar"><i class="fas fa-times icone-desativar"></i></a>
                                         </button>

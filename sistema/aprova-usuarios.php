@@ -16,7 +16,7 @@ require_once '../config/config_geral.php';
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="../js/jquery-3.1.1.js"></script>
         <script src="../js/mask.js"></script>
-
+        <script src="../js/loading.js"></script>
     </head>
     <body class="sb-nav-fixed">
         <?php include_once "../ferramentas/navbar.php"; ?>
@@ -52,7 +52,7 @@ $aprovacao = (int) $_GET["aprovacao"];
 ?>
                         <div class="table-responsive">
                             <table class="table table-borderless table-sm">
-                                <thead class="border bg-info text-white">
+                                <thead class="border thead-tabela">
                                     <tr>
                                         <th>Código</th>
                                         <th>Nome</th>
@@ -82,7 +82,7 @@ $aprovacao = (int) $_GET["aprovacao"];
                         <div class="modal text-left" id="user_aprovacao<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content bg-light">
-                                    <div class="modal-header border-0 bg-info">
+                                    <div class="modal-header border-0 header-modal">
                                         <h5 class="text-white">Visualização Completa</h5>
                                         <a href="" data-dismiss="modal" aria-label="Fechar"><i class="fas fa-times icone-desativar"></i></a>
                                         </button>
@@ -113,8 +113,8 @@ $aprovacao = (int) $_GET["aprovacao"];
                                              
                                         </div>
                                         <div class="modal-footer border-0">
-                                            <a href="../ferramentas/aprovacao-usuario.php?aprovaUserCod=<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" name="aprovaUserCod" class="btn btn-sm btn-success" >Aprovar cadastro</a>
-                                            <a href="../ferramentas/reprovacao-usuario.php?reprovaUserCod=<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" name="reprovaUserCod" class="btn btn-sm btn-danger" >Reprovar cadastro</a>
+                                            <a href="../ferramentas/aprovacao-usuario.php?aprovaUserCod=<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" name="aprovaUserCod" class="btn btn-sm btn-success loading" >Aprovar cadastro</a>
+                                            <a href="../ferramentas/reprovacao-usuario.php?reprovaUserCod=<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" name="reprovaUserCod" class="btn btn-sm btn-danger loading" >Reprovar cadastro</a>
                                         </div>
                                     </form>
                                 </div>
@@ -128,7 +128,7 @@ $aprovacao = (int) $_GET["aprovacao"];
                                     } else {
                                         ?>
                                         <tr class="linha-hover">
-                                            <td colspan="4" class="text-center">Não há itens para exibir</td>
+                                            <td colspan="7" class="text-center">Não há itens para exibir</td>
                                         </tr>
                                         <?php
                                     }
@@ -136,7 +136,7 @@ $aprovacao = (int) $_GET["aprovacao"];
                                 </tbody>
                             </table>
                         </div>
-                   
+                       <?php include_once "../ferramentas/modal_loading.php"; ?> 
                         <!--fim conteudo da tela aqui!-->
                 </main>
                 <?php include_once "../ferramentas/rodape.php"; ?>
