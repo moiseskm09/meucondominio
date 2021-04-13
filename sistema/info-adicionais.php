@@ -23,6 +23,7 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <script src="../js/jquery-3.1.1.js"></script>
         <script src="../js/mask.js"></script>
+        <script src="../js/busca-cep.js"></script>
 
     </head>
     <body style="background-color: #f8f9fa">
@@ -87,33 +88,33 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
     </div>
           <div class="form-group col-md-2">
       <label for="cep">CEP</label>
-      <input type="text" class="form-control" id="cep" name="cep">
+      <input type="text" class="form-control" id="cep" name="cep" type="search" maxlength="8" pattern="[0-9]+$">
     </div>
       <div class="form-group col-md-2 mt-2">
           <br>
-      <button class="btn btn-primary">Preencher campos</button>
+          <button type="button" class="btn btn-primary" onclick="pesquisacep(cep.value)">Preencher campos</button>
     </div>
   </div>
   <div class="form-row">
         <div class="form-group col-md-10">
     <label for="endereco">Endereço <span class="text-danger">*</span></label>
-    <input type="text" class="form-control" id="inputAddress" readonly>
+    <input type="text" class="form-control" id="endereco" name="endereco" readonly>
   </div>
         <div class="form-group col-md-2">
-    <label for="inputAddress">Número <span class="text-danger">*</span></label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Ex. 0">
+    <label for="numeroCasa">Número <span class="text-danger">*</span></label>
+    <input type="text" class="form-control" id="numeroCasa" name="numeroCasa" placeholder="Ex. 0">
   </div>
     <div class="form-group col-md-4">
-      <label for="inputCity">Cidade <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" id="inputCity" readonly>
+      <label for="bairro">Bairro <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" id="bairro" name="bairro" readonly>
     </div>
       <div class="form-group col-md-4">
-      <label for="inputCity">Bairro <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" id="inputCity" readonly>
+      <label for="cidade">Cidade <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" id="cidade" name="cidade" readonly>
     </div>
       <div class="form-group col-md-4">
-      <label for="inputCity">Estado <span class="text-danger">*</span></label>
-      <input type="text" class="form-control" id="inputCity" readonly>
+      <label for="estado">Estado <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" id="estado" name="estado" readonly>
     </div>
     
     
