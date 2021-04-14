@@ -52,6 +52,7 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
             </div>
             <form id="formulario" method="POST" action="../ferramentas/adiciona-info-adicionais.php">
                 <div class="form-row">
+                    <input type="hidden" value="<?php echo $codInfoAdd;?>" name="codMorador">
                     <div class="form-group col-md-12">
                         <label for="condominio">Nome do Condomínio <span class="text-danger">*</span></label>
                         <input type="text" class="form-control tamanhoInput" id="condominio" name="condominio" value="<?php echo $resultadoBuscaInfo['m_nomeimovel']; ?>" required>
@@ -89,8 +90,8 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                         <input type="text" class="form-control cpf tamanhoInput" id="cpf" name="cpf" value="<?php echo $resultadoBuscaInfo['m_cpf']; ?>" required>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="dataNascimento">Data de Nascimento <span class="text-danger">*</span></label>
-                        <input type="date" class="form-control tamanhoInput" id="dataNascimento" name="dataNascimento" required>
+                        <label for="nascimento">Data de Nascimento <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control tamanhoInput" id="nascimento" name="nascimento" required>
                     </div>
                     <div class="form-group col-md-3">
                         <label for="email">Email <span class="text-danger">*</span></label></label>
