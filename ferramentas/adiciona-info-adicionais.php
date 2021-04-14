@@ -1,6 +1,5 @@
 <?php
 include_once '../config/conexao.php';
-
 $codMorador = $_POST['codMorador'];
 $nomeCondominio = $_POST['condominio'];
 $tipoImovel = $_POST['tipomoradia'];
@@ -24,7 +23,24 @@ $estado = $_POST['estado'];
 
 if(isset ($nomeCondominio, $tipoImovel, $apartamento, $tipoInquilino, $nome, $sobrenome, $rg, $cpf, $email, $telCelular, $cep, $endereco, $numeroCasa, $bairro, $cidade, $estado)){
 $sqlAtualizaInformacoes  = mysqli_query($conexao, "UPDATE morador SET m_nomeimovel = '$nomeCondominio', m_tipomoradia = '$tipoImovel', m_apartamento = '$apartamento', m_tipoinquilino = '$tipoInquilino', m_nome = '$nome', m_sobrenome = '$sobrenome', m_rg = '$rg', m_cpf = '$cpf', m_datanascimento = '$dataNascimento', m_email = '$email', m_telefone = '$telCelular', m_telresidencial = '$telResidencial', m_telcomercial = '$telComercial', m_cep = '$cep', m_endereco = '$endereco', m_numerocasa = '$numeroCasa', m_bairro = '$bairro', m_cidade = '$cidade', m_estado = '$estado' WHERE m_cod = '$codMorador'");
-    
+   
+$nomemorador = $_POST['nomemorador'];
+$parentesco = $_POST['parentesco'];
+$nascimento = $_POST['dataNascimento'];
+$sub_morador = $_POST['subcodMorador'];
+
+function format($nomemorador, $parentesco, $nascimento, $sub_morador) {
+  return "('{$nomemorador}', '{$parentesco}', '{$nascimento}', '{$sub_morador}' )";
+}
+
+$valores = array_map("format", $nomemorador, $parentesco, $nascimento, $sub_morador);
+
+$query = sprintf("INSERT INTO sub_moradores (subm_nome, subm_parentesco, subm_datanascimento, subm_codmorador) VALUES %s", join(', ', $valores));
+
+$insereSubMoradores = mysqli_query($conexao, $query);
+
+echo $query;
+
     echo "Todos os campos estão preenchidos";
     
 }else {

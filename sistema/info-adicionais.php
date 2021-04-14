@@ -148,7 +148,8 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                 </div>
                 <p class="text-right destaque mb-3"> Caso não tenha, deixe os campos em branco!</p>
 
-                <div class="form-row">                 
+                <div class="form-row">        
+                    <input type="hidden" value="<?php echo $codInfoAdd;?>" id="vai" name="subcodMorador[]">
                     <div class="form-group col-md-5">
                         <label for="nomemorador">Nome Completo</label>
                         <input type="text" class="form-control tamanhoInput" id="nomemorador" name="nomemorador[]">
