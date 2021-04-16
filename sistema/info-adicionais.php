@@ -186,6 +186,7 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                 </div>
                 <p class="text-right destaque"> Caso não tenha, deixe os campos em branco!</p>
                 <div class="form-row">
+                    <input type="hidden" value="<?php echo $codInfoAdd;?>" id="codmempregado" name="codmempregado[]">
                     <div class="form-group col-md-7">
                         <label for="empregado">Nome Completo</label>
                         <input type="text" class="form-control tamanhoInput" id="empregado" name="empregado[]">
@@ -207,6 +208,7 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                 </div>
                 <p class="text-right destaque"> Caso não tenha, deixe os campos em branco!</p>
                 <div class="form-row">
+                    <input type="hidden" value="<?php echo $codInfoAdd;?>" id="codmveiculo" name="codmveiculo[]">
                     <div class="form-group col-md-5">
                         <label for="modeloVeiculo">Marca/Modelo</label>
                         <input type="text" class="form-control tamanhoInput" id="modeloVeiculo" name="modeloVeiculo[]">
@@ -232,13 +234,14 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                 <p class="text-right destaque"> Caso não tenha, deixe os campos em branco!</p>
 
                 <div class="form-row mb-4">
+                    <input type="hidden" value="<?php echo $codInfoAdd;?>" id="codmanimais" name="codmanimais[]">
                     <div class="form-group col-md-5">
                         <label for="Especie">Espécie</label>
-                        <input type="text" class="form-control tamanhoInput" id="Especie" name="Especie">
+                        <input type="text" class="form-control tamanhoInput" id="Especie" name="Especie[]">
                     </div>
                     <div class="form-group col-md-3">
                         <label for="porte">Porte</label>
-                        <select id="porte" name="porte" class="form-control tamanhoInput">
+                        <select id="porte" name="porte[]" class="form-control tamanhoInput">
                             <option selected>Escolha uma opção ...</option>
                             <option value="Pequeno">Pequeno</option>
                             <option value="Médio">Médio</option>
@@ -248,7 +251,7 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                     </div>
                     <div class="form-group col-md-3">
                         <label for="quantidade">Quantidade</label>
-                        <input type="number" class="form-control tamanhoInput" id="quantidade" name="quantidade">
+                        <input type="number" class="form-control tamanhoInput" id="quantidade" name="quantidade[]">
                     </div>
                     <div class="form-group col-md-1 mt-2">
                         <br>
