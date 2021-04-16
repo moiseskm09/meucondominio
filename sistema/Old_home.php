@@ -14,7 +14,7 @@
 
         <title>Meu Condomínio - Home</title>
         <style>
-            body{background-color: #f5f5f5;}
+            body{background-color: #f5f5;}
             .btn-aviso {width: 100%;}
             .card-header{background-image: linear-gradient(to top, #09203f 0%, #537895 100%); border-radius:10px;}
             .todos-avisos{color:#f58322; text-decoration: none;}
