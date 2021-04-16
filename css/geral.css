@@ -8,12 +8,12 @@ and open the template in the editor.
     Author     : Moises
 */
 
-.titulo {
+.titulo{
     color:#023246;
     font-size: 25px;
     
 }
-.botoes {
+.botoes{
     background-color: #ffffff;
     border: 1px solid #EB0FA5;
     color: #224D62;
@@ -36,11 +36,11 @@ and open the template in the editor.
     font-weight: 600;
 }
 
-.icone-editar {
+.icone-editar{
     color:#f58322;
 }
 
-.icone-desativar {
+.icone-desativar{
     color:#bd2130;
 }
 
@@ -49,11 +49,11 @@ and open the template in the editor.
     color: #ffffff;
 }
 
-.fundo-modal {
+.fundo-modal{
     background-color: #f58322;
 }
 
-.header-modal {
+.header-modal{
     background-color: #023246;
     color: #ffffff;
 }
@@ -65,13 +65,12 @@ and open the template in the editor.
     font-weight: 400;
 }
 
-.tamanhoInput:focus {
+.tamanhoInput:focus{
   background-color: #cbd3da;
   box-shadow: 0px 0px 5px #FFD70F;
   border: none;
   font-weight: 600;
   color: #007bff;
-  
 }
 
 .destaque{

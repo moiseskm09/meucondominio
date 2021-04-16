@@ -10,9 +10,10 @@ session_regenerate_id();
 // Define sessão para o usuário logado
 $EMAIL = $_SESSION["email"];
 $NOME = $_SESSION["nome"];
+$NIVEL = $_SESSION["user_nivel"];
 
 
-if (!isset($EMAIL) || !isset ($NOME) ) {
+if (!isset($EMAIL) || !isset ($NOME) || !isset ($NIVEL)) {
 	header("Location: ../index.php");
 	exit;
 } else {

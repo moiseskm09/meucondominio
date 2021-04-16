@@ -3,7 +3,10 @@
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <?php
-                $seleciona_menu = mysqli_query($conexao, "SELECT * from menu GROUP BY menu");
+                $seleciona_menu = mysqli_query($conexao, "SELECT * FROM nivel_acesso
+                                                    INNER JOIN menu ON codMenu = id
+                                                    WHERE cod_perfil = '$NIVEL' and marcado != '0'
+                                                    GROUP BY menu");
                 while ($resultado = mysqli_fetch_assoc($seleciona_menu)) {
                     $idMenu = $resultado["id"];
                     ?>  
@@ -13,7 +16,9 @@
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>       
                     <?php
-                    $seleciona_submenu = mysqli_query($conexao, "SELECT * FROM submenu WHERE cod_menu = '$idMenu' order by submenu");
+                    $seleciona_submenu = mysqli_query($conexao, "SELECT submenu, caminho FROM nivel_acesso
+                                                            INNER JOIN submenu ON codSubmenu = cod_submenu and cod_perfil = '$NIVEL' 
+                                                            WHERE cod_menu = '$idMenu' AND marcado = '1'");
                     if (mysqli_num_rows($seleciona_submenu) == 0) {
                         
                     } else {
