@@ -13,44 +13,61 @@
         <link rel="shortcut icon" href="img/Logo_quallyplan.svg" type="image/x-icon">
 	<link rel="icon" href="img/Logo_quallyplan.svg" type="image/x-icon">
         <title>Meu Condomínio - Autenticação</title>
-        
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            html, body {
+                height: 100%;
+            }
+
+            body {
+                 display: -ms-flexbox;
+                display: flex;
+                -ms-flex-align: center;
+                align-items: center;
+                padding-top: 40px;
+                padding-bottom: 40px;
+                background-image: url("img/5026563.jpg");
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            #caixa-login { 
+                width: 100%;
+                max-width: 500px;
+                padding: 15px;
+                margin: auto;    
+            }
+
+            .tamanho{ height: 45px; border-radius: 10px; font-size: 16px;}
+            .header-modal {
+                background-image: linear-gradient(270deg,#224D62 17%,#29293A 100%);
+                color: #ffffff;
+            }
+            .botoes {
+                background-color: #ffffff;
+                border: 1px solid #FFD70F;
+                color: #224D62;
+                font-weight: 500;
+                font-size: 16px;
+            }
+
+            .botoes:hover{
+                background-color: #224D62;
+                box-shadow: 0px 0px 5px #FFD70F;
+                color: #ffffff;
+                font-weight: 500;
+                font-size: 16px;
+            }
+        </style>
     </head>
-    <style>
-        .altura{
-            height: 100vh;
-            background-color: #e8e8e8;
-        }
-        .fundo-login {
-            background-image: url("img/building.jpg");
-            background-size: cover;
-        }
-        .tamanho{ height: 45px; border-radius: 10px; font-size: 16px;}
-        .tamanho:focus{ height: 45px; border-radius: 10px; font-size: 16px; box-shadow: 0 0px 5px #EB0FA5;}
-        .entrar {
-            background-color: #d30c7b;
-            color: #ffffff;
-        }
-        .entrar:focus{
-            background-color: #d30c7b;
-            color: #ffffff;
-        }
-        .tituloModalLogin {
-            background-color: #d30c7b;
-            color: #ffffff;
-        }
-    </style>
-    <body>
+    <body class="text-center">
 
         <div class="container-fluid"> 
             <div class="row">
-                <div class="col-md-4 altura">
-                    <div class="logo text-center mt-1">
-                        <img src="img/Logo_quallyplan.svg" height="200">
-                        <div class="apresentacao text-center text-dark mt-1">
-                            <h2>Bem-vindo</h2>
-                            <h6>Infome os dados de acesso</h6>
-                        </div>
-        <div>
+                <div id="caixa-login">
                     <?php
                     ini_set('display_errors', 0);
                     error_reporting(0);
@@ -80,25 +97,35 @@
                     } else if ($erro === 4) {
                         echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                   <a href="#" class="close" data-dismiss="alert" aria-label="Close"><i class="fas fa-times"></i></a>
-                                  <p class="mb-0"><strong>Hummm!</strong> Seu cadastro ainda está pendente de aprovação. Assim que es      ?>
-                </div>tiver aprovado, você recebrá um e-mail com instruções de acesso. Fique ligado!</p>
+                                  <p class="mb-0"><strong>Hummm!</strong> Seu cadastro ainda está pendente de aprovação. Assim que estiver aprovado, você recebrá um e-mail com instruções de acesso. Fique ligado!</p>
                                   </div>';
                     }
                     ?>
                 </div>
-                        <div class="formulario text-center" style="margin-top:30px;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div id="caixa-login" class="">
+                        <div class="text-center logo mb-1">
+                            <img src="img/Logo_quallyplan.svg" height="200">
+                        </div>
+
+                        <div class="apresentacao text-center text-dark">
+                            <h4>Bem-vindo</h4>
+                            <h6>Infome os dados de acesso</h6>
+                        </div>
+                        <div class="formulario text-center">
                             <form action="ferramentas/login.php" method="POST">
                                 <div class="input-group mb-3">
-                                    <input type="text" name="email" class="form-control tamanho" placeholder="seuemail@exemplo.com.br" aria-label="Usuário" aria-describedby="basic-addon1">
+                                    <input type="text" name="email" class="form-control tamanho" placeholder="E-mail" aria-label="Usuário" aria-describedby="basic-addon1">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="password" name="senha" class="form-control tamanho" placeholder="Informe sua senha" aria-label="Senha" aria-describedby="basic-addon1">
+                                    <input type="password" name="senha" class="form-control tamanho" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1">
                                 </div>
 
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="form-control tamanho entrar" value="Entrar">
+                                    <input type="submit" class="form-control tamanho btn btn-info" value="Entrar">
                                 </div>
                             </form>
+
                             <div class="apresentacao text-center text-dark">
                                 <p><a href="#esquecisenha" data-toggle="modal" data-target="#esquecisenha" class="text-dark">Esqueceu a senha?</a></p>
                                 <p>Ainda não tem cadastro? <a href="#cadastromorador" data-toggle="modal" data-target="#cadastromorador" class="text-dark">Clique aqui!</a></p>
@@ -106,21 +133,18 @@
                             </div>
 
                         </div>
-                  
                     </div>
-                </div>
-                <div class="col-md-8 fundo-login">
-                    
                 </div>
             </div>
         </div>
+
         <!-- Modal cadastro-->
         <div class="modal" id="cadastromorador" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content bg-light">
-                    <div class="modal-header border-0 tituloModalLogin text-center">
+                    <div class="modal-header border-0 bg-info text-center">
                         <h5 class="modal-title text-white">Solicitação de Cadastro</h5>
-                        <a href="" data-dismiss="modal" aria-label="Fechar"><i class="fas fa-times text-white"></i></a>
+                        <a href="" data-dismiss="modal" aria-label="Fechar"><i class="fas fa-times"></i></a>
                         </button>
                     </div>
                     <form action="ferramentas/cadastro-morador.php" method="POST">
@@ -159,7 +183,7 @@
 
                         </div>
                         <div class="modal-footer border-0">
-                            <button type="submit" class="btn btn-sm entrar">Confirmar</button>
+                            <button type="submit" class="btn btn-sm btn-info">Confirmar</button>
 
                         </div>
                     </form>
@@ -171,9 +195,9 @@
         <div class="modal" id="esquecisenha" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content bg-light">
-                    <div class="modal-header border-0 tituloModalLogin text-center">
+                    <div class="modal-header border-0 bg-info text-center">
                         <h5 class="modal-title text-white">Esqueci minha senha</h5>
-                        <a href="" data-dismiss="modal" aria-label="Fechar"><i class="fas fa-times text-white"></i></a>
+                        <a href="" data-dismiss="modal" aria-label="Fechar"><i class="fas fa-times"></i></a>
                         </button>
                     </div>
                     <form action="" method="POST">
@@ -186,14 +210,14 @@
 
                         </div>
                         <div class="modal-footer border-0">
-                            <button type="submit" class="entrar btn btn-sm">Confirmar</button>
+                            <button type="submit" class="btn btn-sm btn-info">Confirmar</button>
 
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        <!-- Modal esqueci senha fim -->      
+        <!-- Modal esqueci senha fim -->                            
         <script>
             $(document).ready(function () {
                 $('.numero').mask('000');
@@ -232,6 +256,7 @@
                 $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
             });
         </script>
+
         <script src="js/bootstrap.min.js"></script>
     </body>
 </html>

@@ -41,7 +41,7 @@
         </div>
         <div class="sb-sidenav-footer rodape-menu">
             <div class="small">Usuário logado:</div>
-            <span class="usuario"><?php echo "Moises"; ?> </span> <span class="text-white" style="font-size:15px"><?php echo "Pequeno"; ?></span>
+            <span class="usuario"><?php echo ucwords($NOME); ?> </span>
                     </div>
                     </nav>
                     </div>

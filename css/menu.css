@@ -7,41 +7,46 @@ and open the template in the editor.
     Created on : 15 de mar de 2021, 14:48:11
     Author     : Moises
 */
-.fundo-navbar, .fundo-menu, .fundo-dropdown{
-    background-color: #023246;
+.fundo-menu, .fundo-dropdown{
+    background-color: #e8e8e8;
+}
+
+.fundo-navbar {
+ background-color: #d30c7b;
 }
 .fundo-submenu {
-    background-color: #023246;
+    background-color: #CCCCCC;
 }
 .link-menu {
-    color:#ffffff;
+    color:#6c757d !important;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
 }
 .link-menu:hover{
-    color:#EB0FA5;
+    color:#343a40 !important;
     font-weight: bold;
+    background-color: #dbb4ad;
 }
 
 .link-submenu {
-    color:#ffffff;
+    color:#343a40 !important;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
 }
 .link-submenu:hover{
-    color:#EB0FA5;
+    color:#6c757d !important;
     font-weight: bold;
+    background-color: #ffe3dc;
 }
 .rodape-menu{
-    color:#ffffff;
-     box-shadow: 0px 0px 7px #EB0FA5;
-     
+    color:#000000;
+     box-shadow: 0 -5px 5px -5px #EB0FA5;
 }
 .tamanho-icone{
     font-size: 20px;
 }
 .usuario {
-    color:#EB0FA5;
+    color:#d30c7b;
     font-weight: 600;
 }
 
@@ -52,14 +57,17 @@ and open the template in the editor.
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: #FFD70F;
-    -webkit-box-shadow: inset 0 0 6px #FFD70F; 
+    background: #d30c7b;
+    -webkit-box-shadow: inset 0 0 6px #d30c7b; 
 }
 
 .menu-mobile{
     background: #EB0FA5;
     border-radius: 5px;
     border: none;
+}
+.uil{
+    font-size: 22px;
 }
 :root {
   --blue: #007bff;
