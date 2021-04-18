@@ -29,17 +29,20 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                 border-radius: 10px; 
                 font-size: 16px;
                 font-weight: 500;
-                background-color: #cbd3da;
+                background-color: #ffffff;
                 color:#023246;
             }
 
             .tamanhoInput:focus {
-                background-color: #cbd3da;
+                background-color: #ffffff;
                 box-shadow: 0px 0px 5px #EB0FA5;
                 border: none;
                 font-weight: 600;
                 color: #023246;
 
+            }
+            body {
+                background-color: #e8e8e8;
             }
         </style>
     </head>
@@ -55,7 +58,7 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                             <h2 class="titulo">Perfis de acesso</h2>
                             <div class="btn-toolbar mb-2 mb-md-0">
                                 <div class="mr-2">
-                                    <button class="btn btn-sm btn-success">Adicionar</button>
+                                    <a href="#criarPerfil" data-toggle="modal" data-target="#criarPerfil" class="btn btn-sm btn-success">Adicionar</a>
                                 </div>
                             </div>
                            
@@ -83,20 +86,20 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                     </div>
 
                         </div>
+                        <div class="form-row">
                         <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header text-center bg-secondary text-white font-weight-bold">
-                                    Permissões do Perfil
+                            <div class="text-center bg-white destaque font-weight-bold p-1 arredondamento">
+                                    <h5>Permissões do Perfil<h5>
                                 </div>
-                                
+                        </div>
+                            <div class="col-md-12">
                                     <?php if ($clicado_perfil == null){
-                                    echo '<div class="card-body border">';
-                                    echo '<p class="alert alert-warning font-weight-bold">Selecione um perfil</p>';
+                                    echo '<div class="alert-warning mt-2 p-3 arredondamento">';
+                                    echo '<p class="alert font-weight-bold">Selecione um perfil para visualizar as permissões!</p>';
                                    
                                     }else { ?>
-                                
-                                <div class="card-body border border-secondary" style="max-height: 380px; overflow-y: scroll;">
-                            <ul class="list-unstyled">
+
+                            <ul class="list-unstyled bg-white arredondamento">
           <?php 
           $seleciona_menu_permissao = mysqli_query($conexao, "SELECT * FROM menu");
           while ($resultado_permissao = mysqli_fetch_assoc($seleciona_menu_permissao)) {
@@ -104,8 +107,8 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
               ?>
           
           <li>
-              <div class="card-header border-bottom border-info mb-2 mt-2">
-                  <strong class="text-info">
+              <div class="p-2 destaque mb-2 mt-2">
+                  <strong class="">
                       <?php echo $resultado_permissao['menu'];?>
                   </strong>
               </div>                    
@@ -117,7 +120,7 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                   echo "oi";
               }else {
         ?>
-              <ul class="list-unstyled list-unstyled" id="">
+              <ul class="list-unstyled list-unstyled bg-white" id="">
                   <form action="../ferramentas/atualiza_permissao_usuario.php" method="POST">
                       
                   <div class="form-row">
@@ -163,7 +166,7 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                     <div class="text-right col-md-12">
               <li>
                   
-                  <button class="btn btn-small btn-success" type="submit">Salvar</button>
+                  <button class="btn btn-small btn-success loading" type="submit">Salvar</button>
               </li>
               
           </div>
@@ -172,16 +175,12 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
       </ul>       
                                     <?php }?>             
                                     
-                                    
-                                    
-                                </div>
-
-                            </div>
-                                                              <?php
+                        </div>
+                                                                                          <?php
                     $sucesso = (int) $_GET["sucesso"];
                     if ($sucesso === 1) {
                         echo '<br>';
-                        echo '<div class="alert alert-success text-center alert-dismissible fade show font-weight-bold" role="alert">
+                        echo '<div class="alert alert-success text-center alert-dismissible fade show font-weight-bold arredondamento" role="alert">
                               Perfil atualizado com sucesso!
                               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
@@ -193,11 +192,8 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                     }
                     ?>
                         </div>
-                    </div>
-                </div>
-                
                 <!-- Modal -->
-<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="criarPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -207,19 +203,20 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
         </button>
       </div>
       <div class="modal-body">
-          <form action="ferramentas/cadastrarPerfil.php" method="POST">
+          <form action="../ferramentas/cadastrarPerfil.php" method="POST">
                <label for="nome_perfil_novo">Nome do Perfil</label>
-               <input type="text" class="form-control bg-white" name="nome_perfil_novo" placeholder="Insira o nome do perfil" required>
+               <input type="text" class="form-control tamanhoInput" name="nome_perfil_novo" placeholder="Insira o nome do perfil" required>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-success">Salvar</button>
+        <button type="submit" class="btn btn-success loading">Criar</button>
         
         </form>
       </div>
     </div>
   </div>
 </div>
+                <?php include_once "../ferramentas/modal_loading.php"; ?> 
                         <!--fim conteudo da tela aqui!-->
                     </div>
                 </main>

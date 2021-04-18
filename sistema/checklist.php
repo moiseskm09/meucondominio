@@ -17,6 +17,54 @@ require_once '../config/config_geral.php';
         <script src="../js/jquery-3.1.1.js"></script>
         <script src="../js/mask.js"></script>
         <script src="../js/loading.js"></script>
+        <script type="text/javascript" src="../js/webcamjs/webcam.min.js"></script>
+        <script language="JavaScript">
+
+ function bater_foto()
+ {
+ Webcam.snap(function(data_uri)
+ {
+ document.getElementById('results').innerHTML = '<img id="base64image" src="'+data_uri+'"/><button onclick="salvar_foto();">Upload desta Foto</button>';
+ });
+ }
+
+ function mostrar_camera()
+ {
+ Webcam.set({
+ width: 640,
+ height: 480,
+ dest_width: 640,
+ dest_height: 480,
+ crop_width: 300,
+ crop_height: 400,
+ image_format: 'jpeg',
+ jpeg_quality: 100,
+ flip_horiz: true
+ });
+ Webcam.attach('#minha_camera');
+ }
+
+ function salvar_foto()
+ {
+ document.getElementById("carregando").innerHTML="Salvando, aguarde...";
+ var file = document.getElementById("base64image").src;
+ var formdata = new FormData();
+ formdata.append("base64image", file);
+ var ajax = new XMLHttpRequest();
+ ajax.addEventListener("load", function(event) { upload_completo(event);}, false);
+ ajax.open("POST", "upload.php");
+ ajax.send(formdata);
+ }
+
+ function upload_completo(event)
+ {
+ document.getElementById("carregando").innerHTML="";
+ var image_return=event.target.responseText;
+ var showup=document.getElementById("completado").src=image_return;
+ var showup2=document.getElementById("carregando").innerHTML='<b>Upload feito:</b>';
+ }
+ window.onload= mostrar_camera;
+ </script>
              <style>
             .tamanhoInput{ 
                 height: 40px; 
@@ -35,7 +83,29 @@ require_once '../config/config_geral.php';
                 color: #023246;
 
             }
-
+.container
+ {
+ float: left;
+ width:320px;
+ height: 480px;
+ margin-right: 5px;
+ padding: 5px;
+ }
+ #camera
+ {
+ background: #ff6666;
+ height: 480px;
+ }
+ #previa
+ {
+ background: #ffc865;
+ height: 480px;
+ }
+ #salva
+ {
+ background: #4dea02;
+ height: 480px;
+ }
         </style>
     </head>
     <body class="sb-nav-fixed">
@@ -46,247 +116,15 @@ require_once '../config/config_geral.php';
                 <main>
                     <div class="container-fluid">
                         <!--conteudo da tela aqui!-->
-                        <div class="form-row mt-3 border">
-                            <div class="col-md-3">
-                                <img src="../img/Logo_quallyplan.svg" height="100">
-                            </div>
-                            <div class="col-md-6 text-center">
-                                <p><span class="font-weight-bold">QUALLYPLAN SERVIÇOS PATRIMÔNIAIS</span><br>00.000.000/0000-00 - R. DR. CELESTINO, 26<br>NITERÓI - RIO DE JANEIRO - RJ CEP: 24026-900<br> Tel: (21) 2018-1767 - contato@quallyplan.com.br - quallyplan.com.br</p>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="numeroCheckList float-right" style="padding: 5px;">
-                                    <h6 class="text-center mt-2">Check List</h6>
-                                    <p class="text-center">Nº <span class="font-weight-bold destaque" style="font-size: 20px;">1</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <form method="POST">
-                            <div class="form-row border">
-                                <div class="text-center col-md-12 mt-3 destaque"><h4>DADOS DO CLIENTE</h4></div>
-                                <div class="form-group col-md-12 mt-2">
-                                    <input type="text" class="form-control tamanhoInput" id="cliente" name="cliente" placeholder="Nome Cliente">
-                                </div>
-
-                                <div class="text-center col-md-12 mt-3 destaque"><h4>DADOS DO VISTORIADOR</h4></div>
-
-                                <div class="form-group col-md-6 mt-2">
-                                    <input type="text" class="form-control tamanhoInput" id="nomeVistoriador" name="nomeVistoriador" placeholder="Nome Vistoriador">
-                                </div>
-
-                                <div class="form-group col-md-6 mt-2">
-                                    <input type="text" class="form-control tamanhoInput cpf" id="cpfVistoriador" name="cpfVistoriador" placeholder="CPF">
-                                </div>
-                                <div class="text-center col-md-12 mt-3 destaque mb-3"><h4>CHECKLIST</h4></div>
-                                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-                <!--internet -->
-                                <div class="col-md-2 mt-2">
-                                    <p>Tem internet?</p>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control tamanhoInput" id="">
-                                            <option>Sim</option>
-                                            <option>Não</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <input type="text" class="form-control tamanhoInput " id="observacao" name="observacao" placeholder="Observações">
-                                </div>
-<!--internet -->
-<div class="form-group mt-2 mb-3 col-md-12">
-                    <input type="submit" class="btn btn-success form-control" value="Finalizar Check List">
-                </div>
-                            </div>
-                        </form>
-
+                         <div class="container" id="camera"><b>Câmera:</b>
+ <div id="minha_camera"></div><form><input type="button" value="Tirar Foto" onClick="bater_foto()"></form>
+ </div>
+ <div class="container" id="previa">
+ <b>Prévia:</b><div id="results"></div>
+ </div>
+ <div class="container" id="salva">
+ <span id="carregando"></span><img id="completado" src=""/>
+ </div>
                         <!--fim conteudo da tela aqui!-->
                     </div>
                 </main>

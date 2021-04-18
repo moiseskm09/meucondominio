@@ -16,7 +16,7 @@
                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                     </a>       
                     <?php
-                    $seleciona_submenu = mysqli_query($conexao, "SELECT submenu, caminho FROM nivel_acesso
+                    $seleciona_submenu = mysqli_query($conexao, "SELECT submenu, icone_sub, caminho FROM nivel_acesso
                                                             INNER JOIN submenu ON codSubmenu = cod_submenu and cod_perfil = '$NIVEL' 
                                                             WHERE cod_menu = '$idMenu' AND marcado = '1'");
                     if (mysqli_num_rows($seleciona_submenu) == 0) {
