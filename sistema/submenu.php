@@ -2,6 +2,7 @@
 require_once '../config/conexao.php';
 require_once '../config/sessao.php';
 require_once '../config/config_geral.php';
+$menu_clicado = $_GET['id'];
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +22,7 @@ require_once '../config/config_geral.php';
        <?php include_once "../ferramentas/navbar.php";?>
                 <main>
                     <div class="container-fluid">
-                          <div class="container">
+                        <div class="container">
                        <!--conteudo da tela aqui!-->
                        <div class="form-row mt-2">
                            <div class="col-md-12">
@@ -30,34 +31,33 @@ require_once '../config/config_geral.php';
                            </div>
 
                        </div>
-                     
                        <div class="form-row">
                            <div class="col-md-12">
-                               <h4 class="blockquote-footer" style="font-size: 20px;">MENU</h4>
+                               <h4 class="blockquote-footer" style="font-size: 20px;"><a href="home.php" class="destaque">MENU PRINCIPAL</a></h4>
                            </div>
                        </div>
-                       <div class="row">
+                       <div class="form-row">
                            <?php 
-                $selecionaAcessoRapido = mysqli_query($conexao, "SELECT menu, marcado, id, icone, caminho_submenu FROM menu
-                                                            INNER JOIN nivel_acesso ON id = codMenu and cod_perfil = '$NIVEL' GROUP BY menu");
+                $selecionaAcessoRapido = mysqli_query($conexao, "SELECT submenu, marcado, cod_submenu, icone_sub, caminho FROM submenu
+                                                            INNER JOIN nivel_acesso ON codSubmenu = cod_submenu and cod_perfil = '$NIVEL'  and codMenu = '$menu_clicado'");
               if (mysqli_num_rows($selecionaAcessoRapido) == 0 ){
                   echo "sem permissão";
               }else {
                   while ($acessoRapido = mysqli_fetch_assoc($selecionaAcessoRapido)) {
         ?>
                            <div class="col-lg-3 col-md-3 col-6">
-                               <a href="<?php echo $acessoRapido['caminho_submenu']."?id=".$acessoRapido['id'];?>" class="link-acesso">
+                               <a href="<?php echo $acessoRapido['caminho'];?>" class="link-acesso">
                                <div class="card border-0 mb-1 mt-1">
   <div class="card-body acesso-rapido p-1">
-      <h5 class="card-title text-center"><i class="<?php echo $acessoRapido['icone'];?> icone-acesso"></i></h5>
-      <h6 class="card-text text-center"><?php echo $acessoRapido['menu'];?></h6>
+      <h5 class="card-title text-center"><i class="<?php echo $acessoRapido['icone_sub'];?> icone-acesso"></i></h5>
+      <h6 class="card-text text-center"><?php echo $acessoRapido['submenu'];?></h6>
   </div>
 </div>
                                </a>
                            </div>
                   <?php }}   ?>
                        </div>
-                       </div>
+                        </div>
                        
                        <!--fim conteudo da tela aqui!-->
                     </div>
