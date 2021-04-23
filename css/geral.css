@@ -84,16 +84,16 @@ and open the template in the editor.
 
 .icone-acesso{
     font-size: 60px;
-    color: #d30c7b;
+    color: #084d6e;
 }
 
 .acesso-rapido {
-    background-color: #e8e8e8;
-    border-radius: 15px;
+    background-color: #e3e3e3;
 }
 
 .acesso-rapido:hover{
-    box-shadow: 0px 0px 10px #d30c7b;
+    box-shadow: 0px 0px 20px #d30c7b;
+    background-color: #e3e3e3;
     
 }
 .link-acesso:link{

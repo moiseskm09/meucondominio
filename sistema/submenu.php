@@ -39,7 +39,7 @@ $menu_clicado = $_GET['id'];
                        <div class="form-row">
                            <?php 
                 $selecionaAcessoRapido = mysqli_query($conexao, "SELECT submenu, marcado, cod_submenu, icone_sub, caminho FROM submenu
-                                                            INNER JOIN nivel_acesso ON codSubmenu = cod_submenu and cod_perfil = '$NIVEL'  and codMenu = '$menu_clicado'");
+                                                            INNER JOIN nivel_acesso ON codSubmenu = cod_submenu and cod_perfil = '$NIVEL'  and codMenu = '$menu_clicado' ORDER BY cod_submenu");
               if (mysqli_num_rows($selecionaAcessoRapido) == 0 ){
                   echo "sem permissão";
               }else {
@@ -47,8 +47,8 @@ $menu_clicado = $_GET['id'];
         ?>
                            <div class="col-lg-3 col-md-3 col-6">
                                <a href="<?php echo $acessoRapido['caminho'];?>" class="link-acesso">
-                               <div class="card border-0 mb-1 mt-1">
-  <div class="card-body acesso-rapido p-1">
+                               <div class="card border-0 mb-1 mt-1 rounded-circle ml-3">
+  <div class="card-body acesso-rapido p-4 rounded-circle" style="height: 152px; width: 152px">
       <h5 class="card-title text-center"><i class="<?php echo $acessoRapido['icone_sub'];?> icone-acesso"></i></h5>
       <h6 class="card-text text-center"><?php echo $acessoRapido['submenu'];?></h6>
   </div>

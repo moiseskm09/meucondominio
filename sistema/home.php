@@ -39,17 +39,17 @@ require_once '../config/config_geral.php';
                        <div class="row">
                            <?php 
                 $selecionaAcessoRapido = mysqli_query($conexao, "SELECT menu, marcado, id, icone, caminho_submenu FROM menu
-                                                            INNER JOIN nivel_acesso ON id = codMenu and cod_perfil = '$NIVEL' GROUP BY menu");
+                                                            INNER JOIN nivel_acesso ON id = codMenu and cod_perfil = '$NIVEL' GROUP BY menu ORDER BY id");
               if (mysqli_num_rows($selecionaAcessoRapido) == 0 ){
                   echo "sem permissão";
               }else {
                   while ($acessoRapido = mysqli_fetch_assoc($selecionaAcessoRapido)) {
         ?>
-                           <div class="col-lg-3 col-md-3 col-6">
+                           <div class="col-lg-3 col-md-3 col-6 ">
                                <a href="<?php echo $acessoRapido['caminho_submenu']."?id=".$acessoRapido['id'];?>" class="link-acesso">
-                               <div class="card border-0 mb-1 mt-1">
-  <div class="card-body acesso-rapido p-1">
-      <h5 class="card-title text-center"><i class="<?php echo $acessoRapido['icone'];?> icone-acesso"></i></h5>
+                               <div class="card border-0 mb-1 mt-1 rounded-circle ml-3">
+                                   <div class="card-body acesso-rapido p-4 rounded-circle" style="height: 150px; width: 150px">
+      <h5 class="card-title text-center"><i class="<?php echo $acessoRapido['icone'];?> icone-acesso fa-2x"></i></h5>
       <h6 class="card-text text-center"><?php echo $acessoRapido['menu'];?></h6>
   </div>
 </div>
@@ -58,10 +58,18 @@ require_once '../config/config_geral.php';
                   <?php }}   ?>
                        </div>
                        </div>
-                       
+         
                        <!--fim conteudo da tela aqui!-->
                     </div>
                 </main>
+        <footer>
+            <div class="footer fixed-bottom text-right d-none d-sm-block d-md-block d-sm-none d-md-block">
+                <img src="../img/whatsapp.png" width="200">
+            </div>
+            <div class="footer text-right d-block d-sm-none d-none d-sm-block d-md-none">
+                <img src="../img/whatsapp.png" width="200">
+            </div>
+        </footer>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>       
