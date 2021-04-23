@@ -100,3 +100,20 @@ and open the template in the editor.
     color: #343a40 !important;
     text-decoration: none;  
 }
+
+.header-filtro{
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    background-color: #084d6e;
+}
+
+.header-filtro:hover{
+    color: #FFD70F;
+    text-decoration: none;
+}
+
+.card-fundo-body {
+background-color: #e3e3e3;
+}

@@ -48,9 +48,9 @@ require_once '../config/config_geral.php';
                            <div class="col-lg-3 col-md-3 col-6 ">
                                <a href="<?php echo $acessoRapido['caminho_submenu']."?id=".$acessoRapido['id'];?>" class="link-acesso">
                                <div class="card border-0 mb-1 mt-1 rounded-circle ml-3">
-                                   <div class="card-body acesso-rapido p-4 rounded-circle" style="height: 150px; width: 150px">
+                                   <div class="card-body acesso-rapido p-4 rounded-circle" style="height: 148px; width: 148px">
       <h5 class="card-title text-center"><i class="<?php echo $acessoRapido['icone'];?> icone-acesso fa-2x"></i></h5>
-      <h6 class="card-text text-center"><?php echo $acessoRapido['menu'];?></h6>
+      <h6 class="card-text text-center" style="font-size: 15px;"><?php echo $acessoRapido['menu'];?></h6>
   </div>
 </div>
                                </a>

@@ -50,7 +50,7 @@ $menu_clicado = $_GET['id'];
                                <div class="card border-0 mb-1 mt-1 rounded-circle ml-3">
   <div class="card-body acesso-rapido p-4 rounded-circle" style="height: 152px; width: 152px">
       <h5 class="card-title text-center"><i class="<?php echo $acessoRapido['icone_sub'];?> icone-acesso"></i></h5>
-      <h6 class="card-text text-center"><?php echo $acessoRapido['submenu'];?></h6>
+      <h6 class="card-text text-center" style="font-size: 15px;"><?php echo $acessoRapido['submenu'];?></h6>
   </div>
 </div>
                                </a>

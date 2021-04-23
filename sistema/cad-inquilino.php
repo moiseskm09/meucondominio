@@ -18,11 +18,8 @@ require_once '../config/config_geral.php';
         <script src="../js/mask.js"></script>
 
     </head>
-    <body class="sb-nav-fixed">
+    <body>
         <?php include_once "../ferramentas/navbar.php"; ?>
-        <div id="layoutSidenav">
-            <?php include_once "../ferramentas/menu.php"; ?>
-            <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid">
                         <!--conteudo da tela aqui!-->
@@ -126,9 +123,6 @@ require_once '../config/config_geral.php';
                    
                         <!--fim conteudo da tela aqui!-->
                 </main>
-                <?php include_once "../ferramentas/rodape.php"; ?>
-            </div>
-        </div>
         <script src="../js/cp_mascaras.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="../js/scripts.js"></script>

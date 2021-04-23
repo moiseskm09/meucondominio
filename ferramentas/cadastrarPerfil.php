@@ -14,12 +14,23 @@ $id_perfil_criado = $resultado_criacao_perfil['p_cod'];
             
             
 $insere_permissao_perfil_criado = mysqli_query($conexao, "INSERT INTO nivel_acesso (cod_perfil, codMenu, codSubmenu, marcado) VALUES
-('$id_perfil_criado', '1', '2', '0'),
-('$id_perfil_criado', '2', '3', '0'),
-('$id_perfil_criado', '2', '4', '0'),
-('$id_perfil_criado', '4', '6', '0'),
-('$id_perfil_criado', '3', '5', '0'),
-('$id_perfil_criado', '3', '7', '0')");     
+INSERT INTO `nivel_acesso` (`cod_perfil`, `codMenu`, `codSubmenu`, `marcado`) VALUES
+($id_perfil_criado, 1, 1, 1),
+($id_perfil_criado, 1, 2, 1),
+($id_perfil_criado, 2, 3, 1),
+($id_perfil_criado, 8, 4, 1),
+($id_perfil_criado, 1, 5, 1),
+($id_perfil_criado, 1, 6, 1),
+($id_perfil_criado, 1, 7, 1),
+($id_perfil_criado, 2, 8, 1),
+($id_perfil_criado, 2, 9, 1),
+($id_perfil_criado, 2, 10, 1),
+($id_perfil_criado, 3, 11, 1),
+($id_perfil_criado, 7, 12, 1),
+($id_perfil_criado, 7, 13, 1),
+($id_perfil_criado, 3, 14, 1),
+($id_perfil_criado, 3, 15, 1),
+($id_perfil_criado, 3, 16, 1);");     
 
         
 

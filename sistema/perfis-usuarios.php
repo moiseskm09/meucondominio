@@ -18,42 +18,15 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link href="../css/menu.css" rel="stylesheet" />
         <link href="../css/geral.css" rel="stylesheet" />
-        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link href="../css/dashboard.css" rel="stylesheet" />
+          <link rel="stylesheet" href="../css/bootstrap.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
-        <script src="../js/jquery-3.1.1.js"></script>
-        <script src="../js/mask.js"></script>
-        <script src="../js/loading.js"></script>
-        <style>
-            .tamanhoInput{ 
-                height: 40px; 
-                border-radius: 10px; 
-                font-size: 16px;
-                font-weight: 500;
-                background-color: #ffffff;
-                color:#023246;
-            }
-
-            .tamanhoInput:focus {
-                background-color: #ffffff;
-                box-shadow: 0px 0px 5px #EB0FA5;
-                border: none;
-                font-weight: 600;
-                color: #023246;
-
-            }
-            body {
-                background-color: #e8e8e8;
-            }
-        </style>
+        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
     </head>
-    <body class="sb-nav-fixed">
-        <?php include_once "../ferramentas/navbar.php"; ?>
-        <div id="layoutSidenav">
-            <?php include_once "../ferramentas/menu.php"; ?>
-            <div id="layoutSidenav_content">
+    <body>
+       <?php include_once "../ferramentas/navbar.php";?>
                 <main>
                     <div class="container-fluid">
-                        <!--conteudo da tela aqui!-->
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <h2 class="titulo">Perfis de acesso</h2>
                             <div class="btn-toolbar mb-2 mb-md-0">
@@ -63,9 +36,15 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                             </div>
                            
                         </div>
-                        <div class="form-row">
-                            
-                         <div class="form-group col-md-12">
+                        <div class="form-row mt-3">
+                            <div class="col-md-4">
+                               <div class="accordion" id="selecioneperfil">
+                                    <div class="card border-0 mb-2" style="border-radius: 10px;">
+                                        <a href="#perfis" data-toggle="collapse"  aria-expanded="true" aria-controls="perfil" class="text-center header-filtro p-3 borda">Selecione um perfil </a>
+
+                                        <div id="perfis" class="collapse show" aria-labelledby="headingOne" data-parent="#selecioneperfil">
+                                            <div class="card-body card-fundo-body">
+<div class="form-group">
                              <form action="../ferramentas/pesquisa_perfil.php" method="POST" id="perfil">
                                 <div class="form-group">
                                     
@@ -78,28 +57,29 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                                         <option value="<?php echo $perfis["p_cod"];?>"><?php echo $perfis["p_perfil"];?></option>   
                                         <?php } }else{}?>
                                     </select>
-                                    
-                                </div>  
-                                
+                                </div>        
                             </form>
-
                     </div>
-
-                        </div>
-                        <div class="form-row">
-                        <div class="col-md-12">
-                            <div class="text-center bg-white destaque font-weight-bold p-1 arredondamento">
-                                    <h5>Permissões do Perfil<h5>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                        </div>
-                            <div class="col-md-12">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="accordion" id="permissoes">
+                                    <div class="card border-0" style="border-radius: 10px;">
+                                        <a href="#perfilpermissoes" data-toggle="collapse"  aria-expanded="true" aria-controls="perfilpermissoes" class="text-center header-filtro p-3 borda">Permissões <?php if (isset($perfil_option)) { echo "do ".$perfil_option; } else {}?></a>
+
+                                        <div id="perfilpermissoes" class="collapse show" aria-labelledby="headingOne" data-parent="#permissoes">
+                                            <div class="card-body card-fundo-body" style="max-height: 450px; overflow-y: scroll;">
+<div class="">
                                     <?php if ($clicado_perfil == null){
-                                    echo '<div class="alert-warning mt-2 p-3 arredondamento">';
+                                    echo '<div class="alert-warning mt-2 p-1 arredondamento">';
                                     echo '<p class="alert font-weight-bold">Selecione um perfil para visualizar as permissões!</p>';
                                    
                                     }else { ?>
 
-                            <ul class="list-unstyled bg-white arredondamento">
+                            <ul class="list-unstyled">
           <?php 
           $seleciona_menu_permissao = mysqli_query($conexao, "SELECT * FROM menu");
           while ($resultado_permissao = mysqli_fetch_assoc($seleciona_menu_permissao)) {
@@ -117,10 +97,10 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                 $seleciona_submenu_permissao = mysqli_query($conexao, "SELECT submenu, marcado, cod_submenu FROM submenu
                                                             INNER JOIN nivel_acesso ON codSubmenu = cod_submenu and cod_perfil = '$clicado_perfil' WHERE codMenu = '$idMenuPermissao'");
               if (mysqli_num_rows($seleciona_submenu_permissao) == 0 ){
-                  echo "oi";
+                  echo "sem informações para exibir";
               }else {
         ?>
-              <ul class="list-unstyled list-unstyled bg-white" id="">
+              <ul class="list-unstyled list-unstyled" id="">
                   <form action="../ferramentas/atualiza_permissao_usuario.php" method="POST">
                       
                   <div class="form-row">
@@ -176,11 +156,16 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                                     <?php }?>             
                                     
                         </div>
-                                                                                          <?php
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
                     $sucesso = (int) $_GET["sucesso"];
                     if ($sucesso === 1) {
                         echo '<br>';
-                        echo '<div class="alert alert-success text-center alert-dismissible fade show font-weight-bold arredondamento" role="alert">
+                        echo '<div class="alert alert-success text-center alert-dismissible fade show font-weight-bold arredondamento col-md-12" role="alert">
                               Perfil atualizado com sucesso!
                               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
@@ -192,11 +177,15 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
                     }
                     ?>
                         </div>
-                <!-- Modal -->
+
+                    </div>
+                    
+                </main>
+         <!-- Modal -->
 <div class="modal fade" id="criarPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header header-filtro">
         <h5 class="modal-title" id="exampleModalLabel">Criação de perfil</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span>
@@ -216,15 +205,8 @@ $perfil_option = $resultado_perfil_clicado['p_perfil'];
     </div>
   </div>
 </div>
-                <?php include_once "../ferramentas/modal_loading.php"; ?> 
-                        <!--fim conteudo da tela aqui!-->
-                    </div>
-                </main>
-                <?php include_once "../ferramentas/rodape.php"; ?>
-            </div>
-        </div>
-        <script src="../js/cp_mascaras.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="../js/scripts.js"></script>
+        <script src="../js/scripts.js"></script>       
     </body>
 </html>
