@@ -32,8 +32,7 @@ and open the template in the editor.
 
 .linha-hover:hover{
     background-color: rgba(235, 15, 165,0.1);
-    color:#023246;
-    font-weight: 600;
+    color:#023246;   
 }
 
 .icone-editar{
@@ -45,9 +44,10 @@ and open the template in the editor.
 }
 
 .thead-tabela{
-    background-color: #023246;
+    background-color: #084d6e;
     color: #ffffff;
 }
+
 
 .fundo-modal{
     background-color: #f58322;

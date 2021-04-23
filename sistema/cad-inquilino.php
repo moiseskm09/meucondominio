@@ -2,6 +2,34 @@
 require_once '../config/sessao.php';
 require_once '../config/conexao.php';
 require_once '../config/config_geral.php';
+
+
+if (isset($_POST['nome'], $_POST['cpf'], $_POST['email'])) {
+    $nome = $_POST['nome'];
+    $cpf = $_POST['cpf'];
+    $email = $_POST['email'];
+    $sql_code = mysqli_query($conexao, "SELECT * FROM morador WHERE m_nome LIKE '%$nome%' and LIKE '%$cpf%' and LIKE '%$email%'");
+    $numeroLinhas = mysqli_num_rows($sql_code);
+} else{
+
+    //verifica a página atual caso seja informada na URL, senão atribui como 1ª página 
+    $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1; 
+
+    //pegar todos os registros do banco de dados
+    $sql = mysqli_query($conexao, "SELECT m_cod FROM morador");
+    $numeroTotalLinhas = mysqli_num_rows($sql);
+
+    //define o numero de itens por pagina
+    $itens_por_pagina =12;
+
+    //divide o total de linhas pelo numero maximo de registro e retorna um numero inteiro
+    $numero_paginas = ceil($numeroTotalLinhas / $itens_por_pagina);
+    
+    $inicio = ($itens_por_pagina * $pagina) - $itens_por_pagina;
+
+    $sql_buscaMoradorAprovacao = mysqli_query($conexao, "SELECT m_cod, m_nome, m_sobrenome, m_cpf, m_rg, m_datanascimento, m_email, m_telefone FROM morador ORDER BY m_nome LIMIT $inicio, $itens_por_pagina ");
+    $numeroLinhas = mysqli_num_rows($sql_buscaMoradorAprovacao);
+} 
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +52,7 @@ require_once '../config/config_geral.php';
                     <div class="container-fluid">
                         <!--conteudo da tela aqui!-->
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                            <h2 class="titulo">Moradores</h2>
+                            <h2 class="titulo">Inquilinos</h2>
                             <div class="btn-toolbar mb-2 mb-md-0">
                                 <div class="mr-2">
                                     <button class="btn btn-sm btn-success">Adicionar</button>
@@ -36,7 +64,7 @@ require_once '../config/config_geral.php';
                         </div>
 
                         <div class="table-responsive">
-                            <table class="table table-borderless table-sm">
+                            <table class="table table-borderless table-sm" style= "white-space: nowrap;">
                                 <thead class="border thead-tabela">
                                     <tr>
                                         <th>Código</th>
@@ -50,8 +78,7 @@ require_once '../config/config_geral.php';
                                 </thead>
                                 <tbody class="border">
                                     <?php
-                                    $sql_buscaMoradorAprovacao = mysqli_query($conexao, "SELECT * FROM morador WHERE m_status = '1'");
-                                    if (mysqli_num_rows($sql_buscaMoradorAprovacao) > 0) {
+                                    if ($numeroLinhas > 0) {
                                         while ($resultado_buscaMoradorAprovacao = mysqli_fetch_assoc($sql_buscaMoradorAprovacao)) {
                                             ?>
                                             <tr class="linha-hover">
@@ -62,49 +89,7 @@ require_once '../config/config_geral.php';
                                                 <td><?php echo $resultado_buscaMoradorAprovacao['m_telefone'];?></td>
                                                 <td><?php echo date("d/m/Y", strtotime($resultado_buscaMoradorAprovacao['m_datacadastro']));?></td>
                                                 <td class="text-center">
-                                                    <a href="#user_aprovacao<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" data-toggle="modal" data-target="#user_aprovacao<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" class="mr-3"><i class="fas fa-eye text-primary"></i></a>
-                                                    <!-- Modal visualizar-->
-                        <div class="modal text-left" id="user_aprovacao<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content bg-light">
-                                    <div class="modal-header border-0 header-modal">
-                                        <h5 class="text-white">Visualização Completa</h5>
-                                        <a href="" data-dismiss="modal" aria-label="Fechar"><i class="fas fa-times icone-desativar"></i></a>
-                                        </button>
-                                    </div>
-                                    <form action="" method="POST">
-                                        <div class="modal-body">
-                                            <input type="hidden" name="cod_UserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>">
-                                            <label for="nomeUserAprovacao">Nome Completo</label>
-                                            <div class="input-group mb-3">
-                                                <input type="text" id="servico" name="nomeUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo ucwords(strtolower($resultado_buscaMoradorAprovacao['m_nome']." ".$resultado_buscaMoradorAprovacao['m_sobrenome']));?>" required readonly>
-                                            </div>
-                                            <label for="cpfUserAprovacao">CPF</label>
-                                            <div class="input-group mb-3">
-                                                <input type="text" id="servico" name="cpfUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_cpf'];?>" required readonly>
-                                            </div>
-                                            <label for="emailUserAprovacao">E-mail</label>
-                                            <div class="input-group mb-3">
-                                                <input type="text" id="servico" name="emailUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_email'];?>" required readonly>
-                                            </div>
-                                            <label for="telefoneUserAprovacao">Telefone</label>
-                                            <div class="input-group mb-3">
-                                                <input type="text" id="servico" name="telefoneUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_telefone'];?>" required readonly>
-                                            </div>
-                                            <label for="nomeImovelUserAprovacao">Nome Imóvel</label>
-                                            <div class="input-group mb-3">
-                                                <input type="text" id="servico" name="nomeImovelUserAprovacao" class="form-control tamanhoInput" aria-describedby="basic-addon1" value="<?php echo $resultado_buscaMoradorAprovacao['m_nomeimovel'];?>" required readonly>
-                                            </div>
-                                             
-                                        </div>
-                                        <div class="modal-footer border-0">
-                                            <a href="" data-dismiss="modal" aria-label="Fechar" class="btn btn-sm btn-danger" >Fechar</a>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal visualizar fim -->
+                                                    <a href="visualiza-inquilino.php?id=<?php echo $resultado_buscaMoradorAprovacao['m_cod']; ?>" class="mr-3"><i class="fas fa-eye text-primary"></i></a>
                                                 </td> 
                                             </tr>
                                             <?php
@@ -118,6 +103,36 @@ require_once '../config/config_geral.php';
                                     }
                                     ?>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="3"><?php echo "Mostrando ".$numeroLinhas; ?> de <?php echo $numeroTotalLinhas; ?> registros</td>
+                                        <td colspan="4">
+                                            <nav>
+                                    <ul class="pagination pagination-sm justify-content-end">
+                                        <li class="page-item ">
+                                            <a class="page-link" href="?pagina=1" tabindex="-1"><span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Primeira</span></a>
+                                        </li>
+<?php
+for ($i = 1; $i < $numero_paginas + 1; $i++) {
+    $estilo = "";
+    if ($pagina == $i) {
+        $estilo = 'active';
+    }
+    ?>
+                                            <li class="page-item <?php echo $estilo; ?>"><a class="page-link" href="?pagina=<?php echo $i;?>"><?php echo $i;?></a></li>
+                                        <?php }
+                                        ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?pagina=<?php echo $numero_paginas?>"><span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Última</span></a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                                
                             </table>
                         </div>
                    
