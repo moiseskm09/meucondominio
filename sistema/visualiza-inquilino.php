@@ -110,7 +110,7 @@ $resultadoBuscaInfo = mysqli_fetch_assoc($sqlBuscaInfo);
                     </div>
                 </div>
                                                 
-                                            </div>
+                                             </div>
                                         </div>
                                     </div>
                                 </div>
